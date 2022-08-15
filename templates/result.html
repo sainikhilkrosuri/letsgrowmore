@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <!---css--->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body{
+        margin:0px;
+        padding:0px;
+        }
+        table{
+        text-align:center;
+        }
+        .table{
+        width:500px;
+        position:relative;
+        left:250px;
+        top:20px;
+        }
+        form{
+        position:relative;
+        left:500px;
+        top:40px;
+        width:500px;
+        }
+        .messages{
+        width:500px;
+        height:20px;
+        position:relative;
+        left:500px;
+        margin:0px;
+        }
+    </style>
+</head>
+<body>
+
+    <!---navbar--->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Lets Grow More Task-4 &nbsp <b>Result</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" aria-current="page" href="{% url 'index' %}" >Task-1</a>
+            <a class="nav-link" href="{% url 'person' %}">Task-2</a>
+            <a class="nav-link" href="{% url 'student' %}">Task-3</a>
+            <a class="nav-link" href="{% url 'calculator' %}">Task-4</a>
+            <a class="nav-link active" href="{% url 'result' %}">Task-5</a>
+            <a class="nav-link" href="{% url 'submit' %}">Add result for task-5</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!---end of navbar--->
+    <!---messages--->
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Hello User</strong> {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+<!---result--->
+<!--form-->
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" maxlength="10" placeholder="Enter the pin" name="pin" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+        <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Search">
+    </div>
+</form>
+{% if state is True %}
+    <div class="table">
+        <table class="table table-success table-striped">
+            <tr>
+                <th>Name</th>
+                <td>{{main.name}}</td>
+            </tr>
+            <tr>
+                <th>Pin No</th>
+                <td>{{main.pin}}</td>
+            </tr>
+        </table>
+        <table class="table table-success table-striped">
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>Credits</th>
+            </tr>
+            <tr>
+                <th>MS</th>
+                <td>{{main.ms}}</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th>DS</th>
+                <td>{{main.ds}}</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th>Java</th>
+                <td>{{main.java}}</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th>subject</th>
+                <td>O</td>
+                <td>3</td>
+            </tr>
+        </table>
+        <table class="table table-success table-striped">
+            <tr>
+                <th>Pass/Fail</th>
+                <td>Pass</td>
+            </tr>
+            <tr>
+                <th>SGPA</th>
+                <td>9.6</td>
+            </tr>
+        </table>
+    </div>
+{% else %}
+<div class="table">
+    <table class="table table-success table-striped">
+        <tr>
+            <th>Name</th>
+            <td>None</td>
+        </tr>
+        <tr>
+            <th>Pin No</th>
+            <td>None</td>
+        </tr>
+    </table>
+    <table class="table table-success table-striped">
+        <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Credits</th>
+        </tr>
+        <tr>
+            <th>MS</th>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <th>DS</th>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <th>Java</th>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <th>subject</th>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+    </table>
+    <table class="table table-success table-striped">
+        <tr>
+            <th>Pass/Fail</th>
+            <td>None</td>
+        </tr>
+        <tr>
+            <th>SGPA</th>
+            <td>None</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+</body>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</html>
